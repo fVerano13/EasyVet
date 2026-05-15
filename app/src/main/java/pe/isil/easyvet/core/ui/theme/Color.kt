@@ -1,4 +1,4 @@
-package pe.isil.easyvet.ui.theme
+package pe.isil.easyvet.core.ui.theme
 import androidx.compose.ui.graphics.Color
 
 val primaryLight = Color(0xFF006A6A)

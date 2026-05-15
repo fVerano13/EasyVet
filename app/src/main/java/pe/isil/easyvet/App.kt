@@ -4,6 +4,8 @@ import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import pe.isil.easyvet.auth.presentation.login.LoginScreen
+import pe.isil.easyvet.onboarding.presentation.OnBoardingScreen
 
 @Composable
 fun App() {

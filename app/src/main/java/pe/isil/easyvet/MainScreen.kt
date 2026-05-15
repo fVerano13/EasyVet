@@ -14,6 +14,8 @@ import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import pe.isil.easyvet.favorites.presentation.FavoritesScreen
+import pe.isil.easyvet.home.presentation.HomeScreen
 
 @Composable
 fun MainScreen() {
