@@ -80,7 +80,7 @@ fun LoginScreen(
                     PasswordVisualTransformation(),
             //este parámetro sirve para transformar al texto en secreto
             //SI isPasswordVisible es true se muestra la contraseña
-            //SI NO se oculta el texto, como inicia en false por defecto se oculta
+            //SI NO se oculta el texto, por defecto se oculta porque inicia false
             trailingIcon = {
                 //a este parámetro se le asigna un valor de tipo función con {}
                 IconButton(
@@ -90,7 +90,12 @@ fun LoginScreen(
                         //invierte el valor actual de isPasswordVisible
                     }) {
                     Icon(
-                        painter = painterResource(R.drawable.visibility_off),
+                        painter = painterResource(
+                            id = if (isPasswordVisible.value)
+                                R.drawable.visibility
+                            else
+                                R.drawable.visibility_off
+                        ),
                         //se llama al recurso usando R, el tipo de recurso y su nombre
                         contentDescription = null
                         //las imágenes siempre piden una descripción
