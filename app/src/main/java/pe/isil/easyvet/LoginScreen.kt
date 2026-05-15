@@ -16,6 +16,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.input.PasswordVisualTransformation
+import androidx.compose.ui.text.input.VisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pe.isil.easyvet.ui.theme.AppTheme
@@ -29,6 +30,9 @@ fun LoginScreen(
     }
     val password = remember {
         mutableStateOf("")
+    }
+    val isPasswordVisible = remember {
+        mutableStateOf(false)
     }
     //se declara una constante y usando la combinación de la función remember
     //para que cada vez que se renderice/refresque la vista no se pierda el valor
@@ -69,12 +73,22 @@ fun LoginScreen(
             placeholder = {
                 Text("Password")
             },
-            visualTransformation = PasswordVisualTransformation(),
+            visualTransformation =
+                if (isPasswordVisible.value)
+                    VisualTransformation.None
+                else
+                    PasswordVisualTransformation(),
             //este parámetro sirve para transformar al texto en secreto
+            //SI isPasswordVisible es true se muestra la contraseña
+            //SI NO se oculta el texto, como inicia en false por defecto se oculta
             trailingIcon = {
                 //a este parámetro se le asigna un valor de tipo función con {}
-                IconButton(onClick = {}) {
-                    //a este parámetro se le asigna un valor de tipo función con {}
+                IconButton(
+                    onClick = {
+                        //a este parámetro se le asigna un valor de tipo función con {}
+                        isPasswordVisible.value = !isPasswordVisible.value
+                        //invierte el valor actual de isPasswordVisible
+                    }) {
                     Icon(
                         painter = painterResource(R.drawable.visibility_off),
                         //se llama al recurso usando R, el tipo de recurso y su nombre
