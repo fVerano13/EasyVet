@@ -1,4 +1,4 @@
-package pe.isil.easyvet.auth.presentation.login
+package pe.isil.easyvet.features.auth.presentation.login
 
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package pe.isil.easyvet.home.domain.model
+package pe.isil.easyvet.features.home.domain.model
 
 data class Product(
     val id: Int,

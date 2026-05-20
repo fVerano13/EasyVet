@@ -1,4 +1,4 @@
-package pe.isil.easyvet.onboarding.presentation
+package pe.isil.easyvet.features.onboarding.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.Column

@@ -1,4 +1,4 @@
-package pe.isil.easyvet.home.presentation
+package pe.isil.easyvet.features.home.presentation
 
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -29,7 +29,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
-import pe.isil.easyvet.home.domain.model.Product
+import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
 fun HomeScreen() {

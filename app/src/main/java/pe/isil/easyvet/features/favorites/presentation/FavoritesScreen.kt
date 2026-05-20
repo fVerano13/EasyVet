@@ -1,4 +1,4 @@
-package pe.isil.easyvet.favorites.presentation
+package pe.isil.easyvet.features.favorites.presentation
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material3.Text
