@@ -64,4 +64,7 @@ dependencies {
     //Kotlin serialization
     implementation(libs.kotlinx.serialization)
 
+    //Coil
+    implementation(libs.coil.compose)
+    implementation(libs.coil.network.okhttp)
 }
