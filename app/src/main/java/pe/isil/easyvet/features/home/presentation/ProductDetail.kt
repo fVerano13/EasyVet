@@ -233,7 +233,8 @@ fun ProductDetailPreview() {
                 name = "Whiskas Adult Chicken Flavor",
                 description = "Crunchy kibbles with chicken flavor for adult cats. Rich in vitamins and minerals.",
                 image = "https://i.imgur.com/dRC9dEB.png",
-                price = 49.99
+                price = 49.99,
+                isFavorite = false
             )
         )
     }

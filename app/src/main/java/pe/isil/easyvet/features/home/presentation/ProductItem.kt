@@ -1,14 +1,18 @@
 package pe.isil.easyvet.features.home.presentation
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.font.FontWeight
@@ -16,6 +20,8 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import coil3.compose.AsyncImage
+import pe.isil.easyvet.core.ui.icons.favoriteBorder
+import pe.isil.easyvet.core.ui.icons.favoriteFilled
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
@@ -33,16 +39,36 @@ fun ProductItem(product: Product) {
             modifier = Modifier
                 .padding(horizontal = 8.dp)
         ) {
-            AsyncImage(
-                model = product.image,
-                contentDescription = product.name,
-                contentScale = ContentScale.Fit,
-                //para que la imagen no pierda su proporción
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .height(216.dp)
-            )
-            //permite mostrar una imagen de internet de manera asíncrona
+            Box {
+                AsyncImage(
+                    model = product.image,
+                    contentDescription = product.name,
+                    contentScale = ContentScale.Fit,
+                    //para que la imagen no pierda su proporción
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(216.dp)
+                )
+                //permite mostrar una imagen de internet de manera asíncrona
+                IconButton(
+                    onClick = {},
+                    modifier = Modifier.align(Alignment.TopEnd)
+                ) {
+                    Icon(
+                        if (product.isFavorite) {
+                            favoriteFilled
+                        } else {
+                            favoriteBorder
+                        },
+                        contentDescription = null,
+                        tint = if (product.isFavorite) {
+                            MaterialTheme.colorScheme.primary
+                        } else {
+                            MaterialTheme.colorScheme.onBackground
+                        }
+                    )
+                }
+            }
             Text(
                 text = product.name,
                 fontWeight = FontWeight.SemiBold,
