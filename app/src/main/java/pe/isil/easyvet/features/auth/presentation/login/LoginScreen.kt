@@ -91,7 +91,7 @@ fun LoginScreen(
             },
             visualTransformation =
                 if (isPasswordVisible.value)
-                    VisualTransformation.Companion.None
+                    VisualTransformation.None
                 else
                     PasswordVisualTransformation(),
             //este parámetro sirve para transformar al texto en secreto
