@@ -14,12 +14,10 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.internal.isLiveLiteralsEnabled
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.shadow
@@ -30,97 +28,99 @@ import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import pe.isil.easyvet.R
 import pe.isil.easyvet.core.ui.theme.AppTheme
+import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun HomeScreen(viewModel: HomeViewModel = viewModel()) {
+fun HomeScreen(viewModel: HomeViewModel = viewModel(), onProductClick: (Product) -> Unit = {}) {
     val state by viewModel.uiState.collectAsState()
 
-    Scaffold { paddingValues ->
-        Column(
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+    ) {
+        Row(
             modifier = Modifier
-                .fillMaxSize()
-                .padding(paddingValues)
+                .padding(16.dp)
         ) {
-            Row(
-                modifier = Modifier
-                    .padding(16.dp)
-            ) {
-                Column {
-                    Text(
-                        text = "Miraflores",
-                        fontWeight = FontWeight.Bold
-                    )
-
-                    Text(
-                        text = "Home"
-                    )
-                }
-
-                Spacer(
-                    modifier = Modifier
-                        .weight(1f)
+            Column {
+                Text(
+                    text = "Miraflores",
+                    fontWeight = FontWeight.Bold
                 )
 
-                IconButton(
-                    onClick = {},
-                    modifier = Modifier
-                        .shadow(elevation = 16.dp, CircleShape)
-                        .background(MaterialTheme.colorScheme.onPrimary)
+                Text(
+                    text = "Home"
+                )
+            }
+
+            Spacer(
+                modifier = Modifier
+                    .weight(1f)
+            )
+
+            IconButton(
+                onClick = {},
+                modifier = Modifier
+                    .shadow(elevation = 16.dp, CircleShape)
+                    .background(MaterialTheme.colorScheme.onPrimary)
+            ) {
+                Icon(
+                    painter = painterResource(R.drawable.visibility),
+                    contentDescription = null
+                )
+            }
+        }
+
+        OutlinedTextField(
+            value = "",
+            onValueChange = {},
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(horizontal = 16.dp)
+                .background(MaterialTheme.colorScheme.onPrimary),
+            leadingIcon = {
+                Icon(
+                    painter = painterResource(R.drawable.visibility),
+                    contentDescription = null
+                )
+            },
+            placeholder = {
+                Text(
+                    text = "Search"
+                )
+            }
+        )
+
+        BannerSection()
+
+        when {
+            state.products.isNotEmpty() -> {
+                ProductList(state.products) { product ->
+                    onProductClick(product)
+                }
+                //se llama a la función ProductList y se le pasa products
+                //que contiene una lista de objetos Product
+                //y cada elemento de la lista se almacena temporalmente en product
+                //para ser pasado como parámetro a onProductClick
+            }
+
+            state.isLoading -> {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
                 ) {
-                    Icon(
-                        painter = painterResource(R.drawable.visibility),
-                        contentDescription = null
-                    )
+                    CircularProgressIndicator()
                 }
             }
 
-            OutlinedTextField(
-                value = "",
-                onValueChange = {},
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .padding(horizontal = 16.dp)
-                    .background(MaterialTheme.colorScheme.onPrimary),
-                leadingIcon = {
-                    Icon(
-                        painter = painterResource(R.drawable.visibility),
-                        contentDescription = null
-                    )
-                },
-                placeholder = {
-                    Text(
-                        text = "Search"
-                    )
-                }
-            )
-
-            BannerSection()
-
-            when {
-                state.products.isNotEmpty() -> {
-                    ProductList(state.products)
-                    //se llama a la función ProductList y se le pasa products
-                    //que contiene una lista de objetos Product 
-                }
-
-                state.isLoading -> {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        CircularProgressIndicator()
-                    }
-                }
-
-                else -> {
-                    Column(
-                        verticalArrangement = Arrangement.Center,
-                        horizontalAlignment = Alignment.CenterHorizontally,
-                        modifier = Modifier.fillMaxSize()
-                    ) {
-                        Text(text = "No products found")
-                    }
+            else -> {
+                Column(
+                    verticalArrangement = Arrangement.Center,
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier.fillMaxSize()
+                ) {
+                    Text(text = "No products found")
                 }
             }
         }

@@ -11,8 +11,9 @@ import androidx.compose.ui.unit.dp
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun ProductList(products: List<Product>) {
-    //esta función recibe products de tipo lista del model Product
+fun ProductList(products: List<Product>, onProductClick: (Product) -> Unit) {
+    //esta función recibe products de tipo lista del model Product y onProductClick que recibe como parámetro
+    //el producto seleccionado
     LazyVerticalGrid(
         //crea una grilla vertical que carga los elementos a medida que aparezcan en la pantalla
         columns = GridCells.Fixed(2),
@@ -24,10 +25,13 @@ fun ProductList(products: List<Product>) {
     ) {
 
         items(products) { product ->
-            ProductItem(product)
+            ProductItem(product){
+                onProductClick(product)
+                //cuando se llame ProductItem se enviará product como parámetro a onProductClick
+            }
             //items tiene que recibir una variable de tipo lista para recorrerla
             //y cada elemento de la lista se almacena temporalmente en product
-            //para ser pasada como parámetro de ProductItem
+            //para ser pasado como parámetro de ProductItem
         }
     }
 }

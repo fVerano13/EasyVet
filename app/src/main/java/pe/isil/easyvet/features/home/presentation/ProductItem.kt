@@ -25,14 +25,15 @@ import pe.isil.easyvet.core.ui.icons.favoriteFilled
 import pe.isil.easyvet.features.home.domain.model.Product
 
 @Composable
-fun ProductItem(product: Product) {
-    //esta función recibe product de tipo Product
+fun ProductItem(product: Product, onClick: () -> Unit) {
+    //esta función recibe product de tipo Product y onClick de tipo función que hace referencia al clic en pantalla
     Card(
         modifier = Modifier
             .fillMaxWidth(),
         elevation = CardDefaults.cardElevation(8.dp),
         //crea una sombra debajo del card
-        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onPrimary)
+        colors = CardDefaults.cardColors(MaterialTheme.colorScheme.onPrimary),
+        onClick = onClick
     ) {
         //crea una tarjeta con su elemento
         Column(
